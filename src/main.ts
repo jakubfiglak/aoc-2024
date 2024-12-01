@@ -1,9 +1,12 @@
-import z from 'zod';
-
-const isString = z.string();
+import { getTotalDistance } from './day-01/getTotalDistance';
+import { leftList, rightList } from './day-01/input';
 
 function main() {
-  console.log(isString.parse('Hello TypeScript!'));
+  const totalDistance = getTotalDistance({ leftList, rightList });
+
+  console.log({
+    day_1_task_1: totalDistance,
+  });
 }
 
 main();
