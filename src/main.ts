@@ -1,14 +1,43 @@
 import { getTotalDistance } from './day-01/getTotalDistance';
 import { calculateSimilarityScore } from './day-01/calculateSimilarityScore';
 import { leftList, rightList } from './day-01/input';
+import { reports } from './day-02/input';
+import {
+  formatReport,
+  analyzeReport,
+  checkIfCanBeFixedWithProblemDampener,
+} from './day-02/solution';
 
 function main() {
+  // Day 1
   const totalDistance = getTotalDistance({ leftList, rightList });
   const similarityScore = calculateSimilarityScore({ leftList, rightList });
 
+  // Day 2
+  const formattedReports = reports.map(formatReport);
+  const analyzedReports = formattedReports.map((report) => ({
+    content: report,
+    isSafe: analyzeReport(report).isSafe,
+  }));
+  const safeReportsCount = analyzedReports.filter(
+    (report) => report.isSafe,
+  ).length;
+
+  const unsafeReports = analyzedReports.filter((report) => !report.isSafe);
+
+  const unsafeReportsThatCanBeFixed = unsafeReports
+    .map((report) => checkIfCanBeFixedWithProblemDampener(report.content))
+    .filter(Boolean);
+
   console.log({
-    day_1_task_1: totalDistance,
-    day_1_task_2: similarityScore,
+    day1: {
+      task1: totalDistance,
+      task2: similarityScore,
+    },
+    day2: {
+      task1: safeReportsCount,
+      task2: safeReportsCount + unsafeReportsThatCanBeFixed.length,
+    },
   });
 }
 
