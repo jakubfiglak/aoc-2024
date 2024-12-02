@@ -40,3 +40,18 @@ export function analyzeReport(report: Array<number>) {
 
   return { isSafe: true };
 }
+
+export function checkIfCanBeFixedWithProblemDampener(report: Array<number>) {
+  for (const [idx] of report.entries()) {
+    const reportCopy = [...report];
+    reportCopy.splice(idx, 1);
+
+    const { isSafe } = analyzeReport(reportCopy);
+
+    if (isSafe) {
+      return true;
+    }
+  }
+
+  return false;
+}
