@@ -8,7 +8,7 @@ import {
   checkIfCanBeFixedWithProblemDampener,
 } from './day-02/solution';
 import { memory } from './day-03/input';
-import { calculateResult, extractMulStatements } from './day-03/solution';
+import { calculateResult, processMemory } from './day-03/solution';
 
 function main() {
   // Day 1
@@ -32,7 +32,7 @@ function main() {
     .filter(Boolean);
 
   // Day 3
-  const statements = extractMulStatements(memory);
+  const statements = processMemory(memory);
   const result = calculateResult(statements);
 
   console.log({
@@ -45,7 +45,7 @@ function main() {
       task2: safeReportsCount + unsafeReportsThatCanBeFixed.length,
     },
     day3: {
-      task1: result,
+      task2: result,
     },
   });
 }
