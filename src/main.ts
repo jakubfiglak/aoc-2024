@@ -7,6 +7,8 @@ import {
   analyzeReport,
   checkIfCanBeFixedWithProblemDampener,
 } from './day-02/solution';
+import { memory } from './day-03/input';
+import { calculateResult, processMemory } from './day-03/solution';
 
 function main() {
   // Day 1
@@ -29,6 +31,10 @@ function main() {
     .map((report) => checkIfCanBeFixedWithProblemDampener(report.content))
     .filter(Boolean);
 
+  // Day 3
+  const statements = processMemory(memory);
+  const result = calculateResult(statements);
+
   console.log({
     day1: {
       task1: totalDistance,
@@ -37,6 +43,9 @@ function main() {
     day2: {
       task1: safeReportsCount,
       task2: safeReportsCount + unsafeReportsThatCanBeFixed.length,
+    },
+    day3: {
+      task2: result,
     },
   });
 }
